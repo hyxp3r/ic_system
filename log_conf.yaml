@@ -1,0 +1,38 @@
+version: 1
+disable_existing_loggers': False
+formatters':
+  verbose:
+      format': '%(asctime)s - %(name)s - %(levelname)s - %(pathname)s - %(funcName)s - %(lineno)s-  %(message)s'
+  simple:
+      format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    level: DEBUG
+    class: logging.StreamHandler,
+    formatter: simple,
+  
+  log_file: 
+    level: DEBUG
+    class: 'logging.handlers.RotatingFileHandler'
+    filename: api/logs/api.log
+    maxBytes: 1024 * 1024 * 5
+    backupCount: 5
+    formatter: verbose
+   
+  error_file_api: 
+      level: ERROR
+      class: logging.handlers.RotatingFileHandler
+      filename: api/logs/api_error.log
+      maxBytes: 1024 * 1024 * 5
+      backupCount: 5
+      formatter: verbose
+
+loggers:
+  ic_system.api.debt.tasks:
+    handlers: ['console', 'log_file', 'error_file_api', 'mail_admins']
+    level: ERROR
+
+  debt_task:
+    handlers: ['mail_admins']
+    level: ERROR
+    propagate: False
