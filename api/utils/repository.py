@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import Any, Union
 
 from fastapi import HTTPException, status
-from sqlalchemy import delete, insert, select, update, func
-from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
+from sqlalchemy import delete, func, insert, select, update
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.base import BaseTable
 
@@ -73,9 +73,8 @@ class SQLAlchemyRepository(AbstractRepository):
         stmt = delete(self.model).filter_by(id=id).returning(self.model.id)
         res = await self.session.execute(stmt)
         return res.scalar_one()
-    
-    async def count_all(self) -> int:
-         stmt = select(func.count(self.model.id))
-         count = await self.session.execute(stmt)
-         return count.scalar_one()
 
+    async def count_all(self) -> int:
+        stmt = select(func.count(self.model.id))
+        count = await self.session.execute(stmt)
+        return count.scalar_one()
