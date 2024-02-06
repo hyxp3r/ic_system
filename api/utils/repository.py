@@ -24,7 +24,7 @@ class AbstractRepository(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    async def delete_records(self) -> None:
+    async def delete_one(self) -> None:
         raise NotImplementedError()
 
 
@@ -64,7 +64,7 @@ class SQLAlchemyRepository(AbstractRepository):
         res = await self.session.execute(stmt)
         return res.scalar_one()
 
-    async def delete_records(self, id: int) -> int:
+    async def delete_one(self, id: int) -> int:
         stmt = select(self.model).filter_by(id=id)
         res = await self.session.execute(stmt)
         res = res.scalar_one_or_none()

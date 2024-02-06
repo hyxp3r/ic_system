@@ -11,7 +11,7 @@ class FinancialIndebtedness(BaseTable):
     personal_number = sa.Column(sa.String(10), nullable=False, doc='Личный номер студента')
     contract_number = sa.Column(sa.String(255), nullable=False, doc='Номер договора')
     sum = sa.Column(sa.Float(decimal_return_scale=2), nullable=False, doc='Номер договора')
-    status = sa.Column(sa.Boolean, nullable=False, default=True, doc='Актуальность')
+    status = sa.Column(sa.Boolean, nullable=False, default=True, server_default='1', doc='Актуальность')
     file_created_time = sa.Column(sa.TIMESTAMP, nullable=False, doc='Дата загрузки файла')
 
     def to_read_model(self) -> FinanceSchema:
@@ -25,6 +25,9 @@ class FinancialIndebtedness(BaseTable):
             file_created_time=self.file_created_time,
             created_at=self.created_at
         )
+    
+    def file_date(self):
+        return self.file_created_time
 
 
 

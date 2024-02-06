@@ -8,7 +8,7 @@ class FinanceSchemaAdd(BaseModel):
     personal_number: str
     contract_number: str
     sum: float
-    status: bool = False
+    status: bool = True
     file_created_time: datetime
 
     @field_validator('personal_number')
