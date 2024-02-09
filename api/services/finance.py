@@ -15,10 +15,11 @@ class FinanceService:
         async with uow:
             finance = await uow.finances.get_one(id=id)
         return finance
-    
+
     async def delete_finance_one(self, uow: IUnitOfWork, id: int):
         async with uow:
             finance = await uow.finances.delete_one(id=id)
+            await uow.commit()
         return finance
 
     async def get_count_finance(self, uow: IUnitOfWork) -> int | None:
