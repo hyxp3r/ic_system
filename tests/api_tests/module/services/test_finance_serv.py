@@ -13,7 +13,7 @@ class TestFinanceService:
         personal_number="190722",
         contract_number="fadfagf",
         sum=567.35,
-        file_created_time=datetime.now()
+        file_created_time=datetime(2024, 11, 5)
         )
     
     async def test_fincance_add(self):
