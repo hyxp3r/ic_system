@@ -1,6 +1,8 @@
 from celery import Celery
 from pydantic_settings import BaseSettings
 
+from api.tasks.cron.finance_update import finance_update_task
+
 
 class CelerySettings(BaseSettings):
     broker_url: str
@@ -19,8 +21,13 @@ celery.conf.result_backend = settings.result_backend
 
 celery.conf.beat_schedule = {
     'create_task': {
-        'task': 'create_file',
+        'task': 'update_finance_table',
         'schedule': 89.0,
     },
 }
 celery.conf.timezone = 'UTC'
+
+
+@celery.task(name = "update_finance_table")
+def update_finance_table():
+     finance_update_task()

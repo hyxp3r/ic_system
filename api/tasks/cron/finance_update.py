@@ -58,7 +58,7 @@ def get_file_data(file_path: Path) -> list[dict]:
     return data
 
 
-def update_insert_data(data: list[dict], file_date):
+def update_insert_data(data: list[dict], file_time) -> str:
     stmt_upd = update(FinancialIndebtedness).where(FinancialIndebtedness.status == True).values(status=False)
     with sync_session() as session:
         with session.begin():
@@ -69,13 +69,13 @@ def update_insert_data(data: list[dict], file_date):
                     personal_number=item['Учащийся.Номер личного дела'],
                     contract_number=item['Субконто2.Номер договора'],
                     sum=item['Сумма Конечный остаток Дт'],
-                    file_created_time=file_date,
+                    file_created_time=file_time,
                 )
                 session.execute(stmt_ins)
-    return 'Success'
+    return 'Данные успешно обновлены и добавлены'
 
 
-def insert_data(data: list[dict], file_date):
+def insert_data(data: list[dict], file_time)  -> str:
     with sync_session() as session:
         with session.begin():
             for item in data:
@@ -84,7 +84,22 @@ def insert_data(data: list[dict], file_date):
                     personal_number=item['Учащийся.Номер личного дела'],
                     contract_number=item['Субконто2.Номер договора'],
                     sum=item['Сумма Конечный остаток Дт'],
-                    file_created_time=file_date,
+                    file_created_time=file_time,
                 )
                 session.execute(stmt_ins)
-    return 'Success'
+    return 'Данные успешно добавлены'
+
+def finance_update_task(file_path = FILE_PATH):
+    file_time = get_mtime(file_path)
+    count_data_table = get_count()
+    data = get_file_data(file_path)
+    if count_data_table > 0:
+        db_time = get_date_db()
+        compare_result = make_dates_compare(file_time, db_time)
+        if compare_result:
+            return "Обновление данных не требуется"
+        result = update_insert_data(data, file_time)
+        return result
+    result = insert_data(data, file_time)
+    return result
+    

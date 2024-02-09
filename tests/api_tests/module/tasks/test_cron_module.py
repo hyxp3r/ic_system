@@ -44,6 +44,10 @@ class TestDB:
         with sync_session() as session:
             session.query(FinancialIndebtedness).delete()
             session.commit()
+        yield
+        with sync_session() as session:
+            session.query(FinancialIndebtedness).delete()
+            session.commit()
 
     def test_count_records(self):
         count = get_count()
@@ -59,7 +63,6 @@ class TestDB:
         assert isinstance(file_date, datetime)
 
     def test_insert_data(self, delete_from_table_finance):
-        print(delete_from_table_finance)
         data = get_file_data(self.file_path)
         file_date = get_mtime(self.file_path)
         result = insert_data(data, file_date)
@@ -68,7 +71,7 @@ class TestDB:
             count = session.execute(stmt)
         data_len = len(data)
         assert count.scalar_one() == data_len
-        assert result == "Success"
+        assert result == "Данные успешно добавлены"
 
     def test_insert_update_data(self, delete_from_table_finance):
         self.test_insert_data(delete_from_table_finance)
@@ -83,7 +86,7 @@ class TestDB:
         data_len = len(data)
         assert count.scalar_one() == data_len*2
         assert count_filter.scalar_one() == data_len
-        assert result == "Success"
+        assert result == "Данные успешно обновлены и добавлены"
 
 
 class TestFileCompare:

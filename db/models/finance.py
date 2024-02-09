@@ -8,7 +8,7 @@ class FinancialIndebtedness(BaseTable):
     """Таблица c задолженностями студентов"""
 
     fio = sa.Column(sa.String(255), nullable=False, doc='ФИО студента')
-    personal_number = sa.Column(sa.String(10), nullable=False, doc='Личный номер студента')
+    personal_number = sa.Column(sa.String(10), nullable=False, doc='Личный номер студента', index=True)
     contract_number = sa.Column(sa.String(255), nullable=False, doc='Номер договора')
     sum = sa.Column(sa.Float(decimal_return_scale=2), nullable=False, doc='Номер договора')
     status = sa.Column(sa.Boolean, nullable=False, default=True, server_default='1', doc='Актуальность')
