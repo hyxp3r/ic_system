@@ -12,7 +12,7 @@ class FinancialIndebtedness(BaseTable):
     contract_number = sa.Column(sa.String(255), nullable=False, doc='Номер договора')
     sum = sa.Column(sa.Float(decimal_return_scale=2), nullable=False, doc='Номер договора')
     status = sa.Column(sa.Boolean, nullable=False, default=True, server_default='1', doc='Актуальность')
-    file_created_time = sa.Column(sa.TIMESTAMP, nullable=False, doc='Дата загрузки файла')
+    file_created_time = sa.Column(sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now(), doc='Дата загрузки файла')
 
     def to_read_model(self) -> FinanceSchema:
         return FinanceSchema(
