@@ -1,6 +1,4 @@
-from typing import List, Optional
-
-from fastapi import APIRouter, Path, status
+from fastapi import APIRouter, status
 
 from api.src.dependencies.uow import UOWDep
 from api.schemas.financeDTO import FinanceSchema
@@ -21,7 +19,7 @@ router = APIRouter(
                                      }                   
                       }
             )
-async def get_language(uow: UOWDep,
+async def get_finance(uow: UOWDep,
                        personal_number:str):
     
     finances = await FinanceService().get_finance_by_personal_number(uow, personal_number=personal_number)
