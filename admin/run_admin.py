@@ -4,7 +4,7 @@ from flask import Flask
 from flask_admin import Admin, AdminIndexView
 
 from db import sync_session
-from db.models.finance import FinancialIndebtedness
+from db import FinancialIndebtedness, Students
 
 
 def create_app() -> Flask:
@@ -16,8 +16,10 @@ def create_app() -> Flask:
     admin = Admin(app, name='IC_SYSTEM', index_view=AdminIndexView(name='📃', url='/'), template_mode='bootstrap4')
 
     from admin.views.finance import FinancialIndebtednessView
+    from admin.views.students import StudentsView
 
     admin.add_view(FinancialIndebtednessView(FinancialIndebtedness, sync_session, name='Фин. задолженность'))
+    admin.add_view(StudentsView(Students, sync_session, name='Студенты'))
 
     return cast(Flask, admin.app)
 
