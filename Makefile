@@ -33,5 +33,17 @@ pretty_windows:
 	$(VENV)/Scripts/isort $(CODE)
 	$(VENV)/Scripts/unify --in-place --recursive $(CODE)
 
-run-admin:
-	poetry run python -m admin.app
+run_admin:
+	poetry run python -m admin.run_admin
+
+run_celery:
+	celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log
+
+run_celery_windows:
+	celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log --pool=solo
+
+run_celery_beat:
+	celery -A api.tasks.tasks beat
+
+run_api:
+	uvicorn api.run_api:app --host 127.0.0.1 --port 8000
