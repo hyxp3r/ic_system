@@ -2,11 +2,13 @@ from abc import ABC, abstractmethod
 from typing import Type
 
 from api.repositories.finance import FinanceRepository
+from api.repositories.students import StudentRepository
 from db import async_session_maker
 
 
 class IUnitOfWork(ABC):
     finances: Type[FinanceRepository]
+    students: Type[StudentRepository]
 
     @abstractmethod
     def __init__(self):
@@ -36,6 +38,7 @@ class UnitOfWork(IUnitOfWork):
     async def __aenter__(self):
         self.session = self.session_factory()
         self.finances = FinanceRepository(self.session)
+        self.students = StudentRepository(self.session)
 
     async def __aexit__(self, *args):
         await self.rollback()
