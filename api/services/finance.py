@@ -17,10 +17,10 @@ class FinanceService:
         async with uow:
             finance = await uow.finances.get_one(id=id)
         return finance
-    
+
     async def get_finance_by_personal_number(self, uow: IUnitOfWork, personal_number: str) -> Type[FinanceSchema]:
         async with uow:
-            finance = await uow.finances.get_finance_by_personal_number(personal_number = personal_number)
+            finance = await uow.finances.get_finance_by_personal_number(personal_number=personal_number)
         return finance
 
     async def delete_finance_one(self, uow: IUnitOfWork, id: int):
