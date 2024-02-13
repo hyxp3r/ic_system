@@ -75,7 +75,7 @@ def update_insert_data(data: list[dict], file_time) -> str:
     return 'Данные успешно обновлены и добавлены'
 
 
-def insert_data(data: list[dict], file_time)  -> str:
+def insert_data(data: list[dict], file_time) -> str:
     with sync_session() as session:
         with session.begin():
             for item in data:
@@ -89,7 +89,8 @@ def insert_data(data: list[dict], file_time)  -> str:
                 session.execute(stmt_ins)
     return 'Данные успешно добавлены'
 
-def finance_update_task(file_path = FILE_PATH):
+
+def finance_update_task(file_path=FILE_PATH):
     file_time = get_mtime(file_path)
     count_data_table = get_count()
     data = get_file_data(file_path)
@@ -97,9 +98,8 @@ def finance_update_task(file_path = FILE_PATH):
         db_time = get_date_db()
         compare_result = make_dates_compare(file_time, db_time)
         if compare_result:
-            return "Обновление данных не требуется"
+            return 'Обновление данных не требуется'
         result = update_insert_data(data, file_time)
         return result
     result = insert_data(data, file_time)
     return result
-    
