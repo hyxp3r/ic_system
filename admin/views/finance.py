@@ -3,7 +3,6 @@ from flask_admin.contrib.sqla import ModelView
 
 class FinancialIndebtednessView(ModelView):
     can_edit = False
-    can_create = True
     can_delete = False
     can_view_details = True
 
