@@ -9,7 +9,7 @@ class StudentSchemaAdd(BaseModel):
     group: str
     program: str
     form: str
-    email: str|None  = None
+    email: str | None = None
 
     @field_validator('personal_number')
     def must_be_int(cls, v: str) -> str | ValueError:
