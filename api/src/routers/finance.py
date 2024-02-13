@@ -1,6 +1,7 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Depends, status
 
 from api.src.dependencies.uow import UOWDep
+from api.src.dependencies.tokens import get_current_user
 from api.schemas.financeDTO import FinanceSchema
 from api.services.finance import FinanceService
 
@@ -20,7 +21,8 @@ router = APIRouter(
                       }
             )
 async def get_finance(uow: UOWDep,
-                       personal_number:str):
-    
+                      user =  Depends(get_current_user),
+                       ):
+    personal_number = user.personal_number
     finances = await FinanceService().get_finance_by_personal_number(uow, personal_number=personal_number)
     return finances
