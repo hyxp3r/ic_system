@@ -3,8 +3,7 @@ from typing import cast
 from flask import Flask
 from flask_admin import Admin, AdminIndexView
 
-from db import sync_session
-from db import FinancialIndebtedness, Students
+from db import FinancialIndebtedness, Students, sync_session
 
 
 def create_app() -> Flask:
