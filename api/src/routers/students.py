@@ -14,8 +14,7 @@ router = APIRouter(
     '/creating_codes',
     status_code=status.HTTP_200_OK,
 )
-async def make_code(uow: UOWDep, personal_number: str):
-
+async def create_code(uow: UOWDep, personal_number: str):
     await StudentService().make_verify_code(uow, personal_number=personal_number)
     return {'status': 'Ok', 'detail': 'Code was sended'}
 
