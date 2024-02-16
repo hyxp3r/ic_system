@@ -30,3 +30,11 @@ class Redis:
     async def set(self, key: str, value: str, ex: int = None):
         result = await self.connection.set(name=key, value=value, ex=ex)
         return result
+
+    async def delete(self, key: str):
+        result = await self.connection.delete(key)
+        return result
+
+    async def is_exist(self, key: str) -> int | None:
+        isExists = await self.connection.exists(key)
+        return isExists
