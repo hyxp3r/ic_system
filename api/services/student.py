@@ -15,7 +15,7 @@ settings = ApiKeySettings()
 
 SECRET_KEY = settings.secret_key
 ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 30  # не используется, при необходимости можно указать при установке токена
 
 
 class StudentService:
@@ -37,7 +37,7 @@ class StudentService:
             )
         verification_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
         async with redis:
-            set_result = await redis.set(key=personal_number, value=verification_code, ex=300)
+            await redis.set(key=personal_number, value=verification_code, ex=300)
         send_verification_code_task.delay(email, verification_code)
 
     async def verify_code(self, uow: IUnitOfWork, personal_number: str, verification_code: str) -> Token:
