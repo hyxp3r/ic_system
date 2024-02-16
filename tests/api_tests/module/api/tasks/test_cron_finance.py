@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 
 import pytest
-from sqlalchemy import delete, func, insert, select
+from sqlalchemy import  func, insert, select
 
 from api.schemas.financeDTO import FinanceSchemaAdd
 from api.tasks.cron.finance_update import get_mtime, get_count, get_date_db, get_file_data, make_dates_compare, insert_data, update_insert_data
