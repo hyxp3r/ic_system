@@ -12,7 +12,9 @@ SECRET_KEY = settings.secret_key
 ALGORITHM = settings.algorithm
 
 
-async def get_current_user(uow: UOWDep, token: str = Header(convert_underscores=False)) -> StudentSchema:
+async def get_current_user(
+    uow: UOWDep, token: str = Header(alias='Authorization', convert_underscores=False)
+) -> StudentSchema:
     credentials_exception = HTTPException(
         status_code=401,
         detail='Could not validate credentials',
