@@ -9,7 +9,7 @@ class Students(BaseTable):
 
     fio = sa.Column(sa.String(255), nullable=False, doc='ФИО студента')
     personal_number = sa.Column(sa.String(10), nullable=False, unique=True, doc='Личный номер студента', index=True)
-    group = sa.Column(sa.String(10), nullable=False, doc='Группа')
+    group = sa.Column(sa.String(100), nullable=False, doc='Группа')
     program = sa.Column(sa.String(100), nullable=False, doc='Направление')
     form = sa.Column(sa.String(50), nullable=False, doc='Форма')
     email = sa.Column(sa.String(255), nullable=True, doc='Почта')
@@ -24,6 +24,7 @@ class Students(BaseTable):
             group=self.group,
             program = self.program,
             form=self.form,
+            api_key=self.api_key,
             email=self.email
 
         )
