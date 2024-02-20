@@ -8,7 +8,7 @@ from api.schemas.financeDTO import FinanceSchemaAdd
 from api.services.finance import FinanceService
 from api.utils.unitofwork import UnitOfWork
 from db import FinancialIndebtedness, sync_session
-from tests.api_tests.module.api.routers.test_students_router import add_student_with_email
+from tests.module.api.routers.test_students_router import add_student_with_email
 
 
 
