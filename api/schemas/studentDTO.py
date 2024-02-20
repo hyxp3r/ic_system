@@ -22,6 +22,7 @@ class StudentSchemaAdd(BaseModel):
 
 class StudentSchema(StudentSchemaAdd):
     id: int
+    api_key:str | None
 
     class Config:
         from_attributes = True
