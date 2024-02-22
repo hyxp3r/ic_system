@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from api.tasks.cron.finance_update import get_count, get_mtime,  get_file_data, insert_data, finance_update_task
+from api.tasks.cron.finance_update import get_count, get_mtime,  get_file_data, insert_data, update_finance_table
 from api.config import FILE_PATH
 from db import sync_session
 from db.models.finance import FinancialIndebtedness
@@ -42,21 +42,21 @@ class TestCron:
 
 
     def test_cron_insert(self, delete_from_table_finance):
-        result = finance_update_task(self.file_path_valid)
+        result = update_finance_table(self.file_path_valid)
         len_data = len(get_file_data(self.file_path_valid))
         count = get_count()
         assert result == "Данные успешно добавлены"
         assert count == len_data
         
     def test_cron_insert_update(self, delete_from_table_finance, insert_test_fake_data):
-        result = finance_update_task(self.file_path_valid)
+        result = update_finance_table(self.file_path_valid)
         len_data = len(get_file_data(self.file_path_valid))
         count = get_count()
         assert result == "Данные успешно обновлены и добавлены"
         assert count == len_data*2
         
     def test_cron_do_nothing(self, delete_from_table_finance, insert_test_valid_data):
-        result = finance_update_task(self.file_path_valid)
+        result = update_finance_table(self.file_path_valid)
         len_data = len(get_file_data(self.file_path_valid))
         count = get_count()
         assert count == len_data
@@ -64,5 +64,5 @@ class TestCron:
     
     def test_cron_file_error(self, delete_from_table_finance, insert_test_valid_data):
         with pytest.raises(FileNotFoundError):
-            finance_update_task(self.file_path_invalid)
+            update_finance_table(self.file_path_invalid)
 

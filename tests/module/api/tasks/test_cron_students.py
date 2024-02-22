@@ -2,7 +2,7 @@ import pytest
 
 from sqlalchemy import func, insert, select
 
-from api.tasks.cron.students_update import get_students_with_key, get_students_tandem, update_api_keys, insert_students, update_students
+from api.tasks.cron.students_update import get_students_with_key, get_students_tandem, update_api_keys, insert_students, update_students_table
 from db import Students, sync_session
 from api.schemas.studentDTO import StudentSchema, StudentSchemaAdd
 
@@ -87,7 +87,7 @@ def test_insert_students(delete_students):
     assert len_students_tandem_schema == count
 
 def test_update_students(add_student_with_api):
-    update_students()
+    update_students_table()
     stmt = select(func.count(Students.id))
     with sync_session() as session:
         count = session.execute(stmt)
