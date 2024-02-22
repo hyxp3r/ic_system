@@ -90,7 +90,7 @@ def insert_data(data: list[dict], file_time) -> str:
     return 'Данные успешно добавлены'
 
 
-def finance_update_task(file_path=FILE_PATH):
+def update_finance_table(file_path=FILE_PATH):
     file_time = get_mtime(file_path)
     count_data_table = get_count()
     data = get_file_data(file_path)

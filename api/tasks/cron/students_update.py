@@ -43,7 +43,7 @@ def insert_students(students_tandem_schemas:list[StudentSchemaAdd]):
                     session.execute(stmt)
                 session.commit()
 
-def update_students():
+def update_students_table():
     students_tandem_schemas = get_students_tandem()
     students_api = get_students_with_key()
     with sync_session() as session:

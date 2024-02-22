@@ -1,7 +1,8 @@
 from celery import Celery
 from pydantic_settings import BaseSettings
 
-from api.tasks.cron.finance_update import finance_update_task
+from api.tasks.cron.finance_update import update_finance_table
+from api.tasks.cron.students_update import update_students_table
 from api.tasks.mail.verify_mail import send_verification_code
 
 
@@ -30,9 +31,12 @@ celery.conf.timezone = 'UTC'
 
 
 @celery.task(name='update_finance_table')
-def update_finance_table():
-    finance_update_task()
+def update_finance_task():
+    update_finance_table()
 
+@celery.task(name='update_students_table')
+def update_student_task():
+    update_students_table()
 
 @celery.task(name='send_verification_code')
 def send_verification_code_task(email: str, code: str):
