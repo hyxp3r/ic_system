@@ -2,14 +2,14 @@ import pytest
 
 from sqlalchemy import func, insert, select
 
-from api.tasks.cron.students_update import get_students_with_key, get_students_tandem, update_api_keys, insert_students
+from api.tasks.cron.students_update import get_students_with_key, get_students_tandem, update_api_keys, insert_students, update_students
 from db import Students, sync_session
 from api.schemas.studentDTO import StudentSchema, StudentSchemaAdd
 
 @pytest.fixture
 def add_student_with_api():
     stmt = insert(Students).values(fio = "Тест",
-                                    personal_number = "190722",
+                                    personal_number = "233447",
                                     group = "ПИ901",
                                     program = "Прикладная",
                                     form = "Очная",
@@ -85,3 +85,16 @@ def test_insert_students(delete_students):
         count = session.execute(stmt)
         count = count.scalar_one()
     assert len_students_tandem_schema == count
+
+def test_update_students(add_student_with_api):
+    update_students()
+    stmt = select(func.count(Students.id))
+    with sync_session() as session:
+        count = session.execute(stmt)
+        count = count.scalar_one()
+    assert count > 0
+    stmt = select(Students).filter_by(personal_number="233447")
+    cursor = sync_session.execute(stmt)
+    res = cursor.one_or_none()
+    student = res[0].to_read_model()
+    assert student.api_key == "test"
