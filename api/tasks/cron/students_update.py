@@ -37,9 +37,18 @@ def update_api_keys(sudents_api:list[StudentSchema]):
                 session.commit()
 
 def insert_students(students_tandem_schemas:list[StudentSchemaAdd]):
-
         with sync_session() as session:
                 for student in students_tandem_schemas:
                     stmt = insert(Students).values(**student.model_dump())
                     session.execute(stmt)
                 session.commit()
+
+def update_students():
+    students_tandem_schemas = get_students_tandem()
+    students_api = get_students_with_key()
+    with sync_session() as session:
+        session.query(Students).delete()
+        session.commit()
+    insert_students(students_tandem_schemas)
+    if len(students_api) > 0:
+        update_api_keys(students_api)
