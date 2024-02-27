@@ -39,6 +39,7 @@ class StudentService:
         async with redis:
             await redis.set(key=personal_number, value=verification_code, ex=300)
         send_verification_code_task.delay(email, verification_code)
+        return email
 
     async def verify_code(self, uow: IUnitOfWork, personal_number: str, verification_code: str) -> Token:
         redis = Redis()
