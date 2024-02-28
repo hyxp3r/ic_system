@@ -30,3 +30,5 @@ WORKDIR /ic_system
 COPY . /ic_system
 
 RUN pip3 install poetry
+
+RUN poetry install --no-root
