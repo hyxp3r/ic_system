@@ -10,7 +10,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     env_file:
-      - .env-prod
+      - .env
 
   redis:
     image: 'redis:alpine'
