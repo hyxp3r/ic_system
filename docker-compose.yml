@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: db_app
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file:
+      - .env-prod
+
+  redis:
+    image: 'redis:alpine'
+    container_name: redis
+    restart: always
+
+  api:
+    build:
+      context: .
+    env_file:
+      - .env
+    container_name: api
+    restart: always
+    command: bash -c "run_api_prod"
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - redis
+
+  admin:
+    build:
+      context: .
+    env_file:
+      - .env
+    container_name: admin
+    restart: always
+    command: bash -c "make run_admin"
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - api
+
+volumes:
+  db_data:

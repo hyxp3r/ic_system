@@ -47,3 +47,6 @@ run_celery_beat:
 
 run_api:
 	uvicorn api.run_api:app --host 127.0.0.1 --port 8000
+
+run_api_prod:
+	gunicorn api.run_api:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
