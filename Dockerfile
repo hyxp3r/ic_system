@@ -14,6 +14,7 @@ RUN apt-get update
 RUN apt-get install -y apt-utils
 RUN apt-get install -y curl
 RUN apt-get install -y lsb-release
+RUN apt-get install libatlas-base-dev
 RUN su
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list
