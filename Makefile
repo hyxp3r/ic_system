@@ -37,13 +37,13 @@ run_admin:
 	poetry run python -m admin.run_admin
 
 run_celery:
-	celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log
+	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log
 
 run_celery_windows:
-	celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log --pool=solo
+	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log --pool=solo
 
 run_celery_beat:
-	celery -A api.tasks.tasks beat
+	poetry run celery -A api.tasks.tasks beat
 
 run_api:
 	poetry run uvicorn api.run_api:app --host 127.0.0.1 --port 8000
