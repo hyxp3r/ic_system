@@ -42,6 +42,3 @@ class TandemSettings(BaseSettings):
     class Config:
         env_prefix = 'TANDEM_'
         env_file = '.env'
-
-
-connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=10.0.150.141;DATABASE=Tandem_prod;UID=pao;PWD=passpao"
