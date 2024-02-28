@@ -49,9 +49,6 @@ services:
     restart: always
     build: .
     command: bash -c "make run_celery"
-    volumes:
-      - static:/static
-
     depends_on:
       - redis
       - api
@@ -60,13 +57,10 @@ services:
   celery_sheduel:
     restart: always
     build: .
-    command: bash -c "make run_celery_beat"
-
-    volumes:
-     - static:/static
-      
+    command: bash -c "make run_celery_beat" 
     depends_on:
      - redis
      - celery
+
 volumes:
   db_data:
