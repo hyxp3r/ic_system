@@ -3,7 +3,7 @@ from flask_admin.contrib.sqla import ModelView
 
 class FinancialIndebtednessView(ModelView):
     can_edit = True
-    can_delete = False
+    can_delete = True
     can_view_details = True
 
     column_default_sort = [('created_at', True), ('fio', False)]
