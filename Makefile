@@ -9,10 +9,10 @@ CODE = \
 JOBS ?= 4
 
 makemigrations:
-	alembic revision --autogenerate
+	poetry run alembic revision --autogenerate
 
 migrate:
-	alembic upgrade head
+	poetry run alembic upgrade head
 
 lint:
 	$(VENV)/bin/black --check $(CODE)

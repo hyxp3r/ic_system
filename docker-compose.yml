@@ -24,7 +24,7 @@ services:
       - .env
     container_name: api
     restart: always
-    command: bash -c "make run_api_prod"
+    command: bash -c "make migrate && make run_api_prod"
     ports:
       - 8000:8000
     depends_on:
