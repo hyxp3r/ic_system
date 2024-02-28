@@ -13,5 +13,5 @@ for router in all_routers:
 @app.on_event("startup")
 def startup_db_client():
    
-    update_finance_table()
+    #update_finance_table()
     update_students_table()
