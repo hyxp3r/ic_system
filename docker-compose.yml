@@ -24,7 +24,7 @@ services:
       - .env
     container_name: api
     restart: always
-    command: bash -c "run_api_prod"
+    command: bash -c "make run_api_prod"
     ports:
       - 8000:8000
     depends_on:
@@ -44,6 +44,29 @@ services:
     depends_on:
       - db
       - api
+  
+  celery:
+    restart: always
+    build: .
+    command: bash -c "make run_celery"
+    volumes:
+      - static:/static
 
+    depends_on:
+      - redis
+      - api
+      
+  
+  celery_sheduel:
+    restart: always
+    build: .
+    command: bash -c "make run_celery_beat"
+
+    volumes:
+     - static:/static
+      
+    depends_on:
+     - redis
+     - celery
 volumes:
   db_data:
