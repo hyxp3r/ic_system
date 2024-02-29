@@ -38,7 +38,7 @@ services:
       - .env
     container_name: admin
     restart: always
-    command: bash -c "make run_admin"
+    command: bash -c "make run_admin_prod"
     ports:
       - 5000:5000
     depends_on:
