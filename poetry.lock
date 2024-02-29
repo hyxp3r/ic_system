@@ -806,6 +806,19 @@ aws = ["boto"]
 azure = ["azure-storage-blob"]
 
 [[package]]
+name = "flask-basicauth"
+version = "0.2.0"
+description = "HTTP basic access authentication for Flask."
+optional = false
+python-versions = "*"
+files = [
+    {file = "Flask-BasicAuth-0.2.0.tar.gz", hash = "sha256:df5ebd489dc0914c224419da059d991eb72988a01cdd4b956d52932ce7d501ff"},
+]
+
+[package.dependencies]
+Flask = "*"
+
+[[package]]
 name = "greenlet"
 version = "3.0.3"
 description = "Lightweight in-process concurrent programming"
@@ -2185,4 +2198,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "45e8dfa18fb7b12832e45ad18e649f53f27ea05322733adf2eaef899dee53131"
+content-hash = "5f00408d53ef196ae244f01c3affbf1f7de23de66e6127646abd39374a13e474"
