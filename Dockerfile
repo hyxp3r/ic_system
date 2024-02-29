@@ -3,12 +3,12 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
-    apt-get install -y python3.11 && \
+    apt-get install -y python3.10 && \
     apt-get install -y python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     
-ENV PATH="/usr/bin/python3.11:${PATH}"
+ENV PATH="/usr/bin/python3.10:${PATH}"
 
 RUN apt-get update
 RUN apt-get install -y apt-utils
