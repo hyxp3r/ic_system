@@ -10,7 +10,7 @@ from admin.views.students import StudentsView
 def create_app() -> Flask:
     app = Flask(__name__)
 
-    app.config['FLASK_ADMIN_SWATCH'] = 'Cosmo'
+    app.config['FLASK_ADMIN_SWATCH'] = 'cosmo'
     app.secret_key = 'kek'
 
     admin = Admin(app, name='IC_SYSTEM', index_view=AdminIndexView(name='📃', url='/'), template_mode='bootstrap4')
