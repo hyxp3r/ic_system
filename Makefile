@@ -37,7 +37,7 @@ run_admin:
 	poetry run python -m admin.run_admin
 
 run_celery:
-	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log
+	poetry run celery -A api.tasks.tasks worker --loglevel=info
 
 run_celery_windows:
 	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log --pool=solo
