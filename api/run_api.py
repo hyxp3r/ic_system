@@ -11,4 +11,4 @@ def create_app():
         app.include_router(router)
     return app
 
-api = create_app()
+app = create_app()
