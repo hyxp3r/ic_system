@@ -41,6 +41,8 @@ services:
     command: bash -c "make run_admin_prod"
     ports:
       - 5000:5000
+    volumes:
+      - static:/static
     depends_on:
       - db
       - api
@@ -64,3 +66,4 @@ services:
 
 volumes:
   db_data:
+  static:
