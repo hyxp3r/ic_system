@@ -43,7 +43,7 @@ def make_dates_compare(file_time: datetime, db_time: datetime):
 
 
 def get_file_data(file_path: Path) -> list[dict]:
-    df = pd.read_excel(
+    df = pd.read_csv(
         file_path,
         usecols=[
             'Субконто1.Юридическое физическое лицо.Наименование',

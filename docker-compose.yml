@@ -30,7 +30,8 @@ services:
     depends_on:
       - db
       - redis
-
+    volumes:
+          - /mnt/share:/app/data
   admin:
     build:
       context: .

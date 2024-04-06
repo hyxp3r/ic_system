@@ -9,3 +9,4 @@ __pycache__
 *.dir
 *.log
 .test.env
+.DS_STORE
