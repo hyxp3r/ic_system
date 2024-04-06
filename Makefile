@@ -37,7 +37,7 @@ run_admin:
 	poetry run python -m admin.run_admin
 
 run_celery:
-	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log
+	poetry run celery -A api.tasks.tasks worker --loglevel=info
 
 run_celery_windows:
 	poetry run celery -A api.tasks.tasks worker --loglevel=info --logfile=celery.log --pool=solo
@@ -52,4 +52,4 @@ run_api_prod:
 	poetry run gunicorn api.run_api:app --workers 4 --preload --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
 
 run_admin_prod:
-	poetry run gunicorn admin.run_admin:app --workers 4 --preload --bind=0.0.0.0:5001
+	poetry run gunicorn admin.run_admin:app --workers 4 --preload --bind=0.0.0.0:5000
