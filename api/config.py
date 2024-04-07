@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings
 
-FILE_PATH = Path("app", "data", 'ЭК_ДЗ.CSV')
+FILE_PATH = Path("/app", "data", 'ЭК_ДЗ.CSV')
 
 
 class ApiKeySettings(BaseSettings):
