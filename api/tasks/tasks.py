@@ -34,9 +34,11 @@ celery.conf.timezone = 'UTC'
 def update_finance_task():
     update_finance_table()
 
+
 @celery.task(name='update_students_table')
 def update_student_task():
     update_students_table()
+
 
 @celery.task(name='send_verification_code')
 def send_verification_code_task(email: str, code: str):

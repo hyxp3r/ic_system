@@ -2,15 +2,24 @@ import pyodbc
 
 from api.config import TandemSettings
 
-
 settings = TandemSettings()
+
 
 class Tandem:
     __server = settings.server
     __database = settings.database
     __uid = settings.uid
     __pwd = settings.pwd
-    __connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=" + __server+ ";DATABASE=" + __database + ";UID=" + __uid + ";PWD=" + __pwd
+    __connection_string = (
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER='
+        + __server
+        + ';DATABASE='
+        + __database
+        + ';UID='
+        + __uid
+        + ';PWD='
+        + __pwd
+    )
 
     def __enter__(self):
         self.__conn = pyodbc.connect(self.__connection_string)

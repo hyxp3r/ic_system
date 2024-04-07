@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings
 
-FILE_PATH = Path("/app", "data", 'ЭК_ДЗ.CSV')
+FILE_PATH = Path('/app', 'data', 'ЭК_ДЗ.CSV')
 
 
 class ApiKeySettings(BaseSettings):
@@ -33,10 +33,11 @@ class MailSettings(BaseSettings):
         env_prefix = 'MAIL_'
         env_file = '.env'
 
+
 class TandemSettings(BaseSettings):
     server: str
     database: str
-    uid:str
+    uid: str
     pwd: str
 
     class Config:

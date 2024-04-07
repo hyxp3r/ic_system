@@ -1,14 +1,14 @@
 from typing import cast
 
 from flask import Flask
-from flask_basicauth import BasicAuth
 from flask_admin import Admin, AdminIndexView
-
-from db import FinancialIndebtedness, Students, sync_session
+from flask_basicauth import BasicAuth
 
 from admin.config import AdminSettings
 from admin.views.finance import FinancialIndebtednessView
 from admin.views.students import StudentsView
+from db import FinancialIndebtedness, Students, sync_session
+
 
 def create_app() -> Flask:
     settings = AdminSettings()
@@ -26,6 +26,6 @@ def create_app() -> Flask:
 
     return cast(Flask, admin.app)
 
+
 app = create_app()
 basic_auth = BasicAuth(app)
-

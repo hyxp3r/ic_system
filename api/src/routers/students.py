@@ -13,7 +13,7 @@ router = APIRouter(
 @router.get(
     '/creating_codes',
     status_code=status.HTTP_200_OK,
-    responses= {
+    responses={
         status.HTTP_200_OK: {
             'description': 'Ok Response',
         },
@@ -23,11 +23,11 @@ router = APIRouter(
         status.HTTP_422_UNPROCESSABLE_ENTITY: {
             'description': 'Student don"t have email',
         },
-    }
+    },
 )
 async def create_code(uow: UOWDep, personal_number: str):
     email = await StudentService().make_verify_code(uow, personal_number=personal_number)
-    return {'status': 'Ok', 'email':email}
+    return {'status': 'Ok', 'email': email}
 
 
 @router.get(
